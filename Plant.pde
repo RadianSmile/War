@@ -91,9 +91,7 @@ class Plant {
       }
     }
   }
-  
-  
-  
+
   void shoot (){
     for (int i = 0 ; i < maxBulletNum ; i++){
       if (bullets[i] == null || bullets[i].broken){
@@ -104,7 +102,4 @@ class Plant {
       } 
     }
   }
-  
-  
-  
 }

@@ -1,6 +1,8 @@
 class Milk {
   float x ;
   float y ;
+  float w ;
+  float h ;
   float speed ;
   int life ;
   PImage[] walkImage = new PImage[4] ;
@@ -24,6 +26,7 @@ class Milk {
     for (int i = 0 ; i < walkImage.length ; i++){
       walkImage[i] = loadImage("data/Milk"+i+".png") ;
     }
+    dieImage = loadImage ("data/MilkDie.png") ; 
   }
  
   void display (){

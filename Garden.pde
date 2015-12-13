@@ -2,7 +2,7 @@ class Garden {
 
   final int colNum = 9 ;
   final int rowNum = 5 ;
-  Plant[][] plants = new Plant[colNum][rowNum] ;
+  Plant[][] plants = new Plant[colNum][rowNum];
   
   final int left = 0 , right = 500 , top = 100 , bottom = 400 ;  
   final int w = right - left ;
@@ -10,8 +10,7 @@ class Garden {
   final float wSpacing = w / colNum ;
   final float hSpacing = h / rowNum ;
   
-  
-  
+
   Garden (){
     plants [0][0] = new Plant (Banana,100,10) ;
   }
@@ -39,7 +38,7 @@ class Garden {
       }
     }
   }
-  
+   
   void update (){
     for (int i = 0 ; i < colNum ; i++){
       for (int j = 0 ; j < rowNum ; j++){
@@ -47,6 +46,5 @@ class Garden {
       }
     }
   }
-  
   
 }

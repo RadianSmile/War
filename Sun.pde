@@ -14,9 +14,8 @@ class Sun {
     img = loadImage ("data/Sun.png");
     w = img.width;
     h = img.height ; 
-    x = random (100,width - img.width);
-    y = -h ;
-    
+
+    resetPosition () ; 
     cycle = 300 ; 
     frame = 0 ; 
     
@@ -41,6 +40,11 @@ class Sun {
     
     eaten = true ;
     frame = 0 ;
-    y = -h ; 
+    resetPosition () ; 
+  }
+  
+  void resetPosition () {
+    x = random (100,width - img.width);
+    y = -h ;
   }
 }
