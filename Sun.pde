@@ -16,7 +16,7 @@ class Sun {
     h = img.height ; 
 
     resetPosition () ; 
-    cycle = 300 ; 
+    cycle = 200 ; 
     frame = 0 ; 
     
     speed = 1 ;

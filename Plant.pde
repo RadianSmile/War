@@ -25,7 +25,7 @@ class Plant {
         init(
           x , y , 50 ,
           loadImage("data/Banana.png"), 
-          loadImage("data/BananaShoot.png"), 100 ,
+          loadImage("data/BananaShoot.png"), 60 ,
           loadImage("data/BananaBullet.png"),3
         );
         break ;
@@ -33,9 +33,9 @@ class Plant {
       case Melon : 
        init(
           x , y , 100 ,
-          loadImage("data/Banana.png"), 
-          loadImage("data/BananaShoot.png"), 100 ,
-          loadImage("data/BananaBullet.png"),3
+          loadImage("data/Melon.png"), 
+          loadImage("data/MelonShoot.png"), 60 / 3  ,
+          loadImage("data/MelonBullet.png"),3
         );
         break ;
     }
@@ -57,12 +57,12 @@ class Plant {
     this.cycle = cycle ; 
     this.bulletImage = bulletImage ; 
     this.bulletSpeed = bulletSpeed ;
-    
+    this.cost = cost ; 
     frame = 0 ; 
     currentImage = normalImage ; 
   }
 
-  void displayFlower (){
+  void display (){
     image(currentImage,x,y);
 
   }
@@ -80,26 +80,35 @@ class Plant {
     
     if (frame == 0 ){
       currentImage = normalImage ; 
-    }else if (frame == cycle - 30){
+    }else if (frame == cycle - 10){
       currentImage = shootImage ;
-      shoot();
     }
-    
+  
     for (int i = 0 ; i < maxBulletNum ; i++){
       if (bullets[i] != null && !bullets[i].broken){
         bullets[i].fly ();
       }
     }
   }
-
-  void shoot (){
-    for (int i = 0 ; i < maxBulletNum ; i++){
-      if (bullets[i] == null || bullets[i].broken){
-        float bulletX = x + normalImage.width/2 ;
-        float bulletY = y + normalImage.height/2 ;
-        bullets[i] = new Bullet (bulletX,bulletY,bulletSpeed,bulletImage) ;
-        break ;
-      } 
-    }
+  
+  boolean isTimeForShoot (){
+    return frame == cycle - 10 ; 
   }
+  
+  Bullet generateBullet (){
+    float bulletX = x + normalImage.width/2 - bulletImage.width/2 ;
+    float bulletY = y + normalImage.height/2 - bulletImage.height/2 ;
+    Bullet bullet = new Bullet (bulletX,bulletY,bulletSpeed,bulletImage) ;
+    return bullet ; 
+  }
+  //void shoot (){
+  //  for (int i = 0 ; i < maxBulletNum ; i++){
+  //    if (bullets[i] == null || bullets[i].broken){
+  //      float bulletX = x + normalImage.width/2 ;
+  //      float bulletY = y + normalImage.height/2 ;
+  //      bullets[i] = new Bullet (bulletX,bulletY,bulletSpeed,bulletImage) ;
+  //      break ;
+  //    } 
+  //  }
+  //}
 }

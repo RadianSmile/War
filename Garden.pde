@@ -1,50 +1,26 @@
-class Garden {
+static class Garden {
 
-  final int colNum = 9 ;
-  final int rowNum = 5 ;
-  Plant[][] plants = new Plant[colNum][rowNum];
+  static final int colNum = 9 ;
+  static final int rowNum = 5 ;
+  static final int left = 100 , right = 600 , top = 100 , bottom = 400 ;  
+  static final int w = right - left ;
+  static final int h = bottom - top ;
+  static final float wSpacing = w / colNum ;
+  static final float hSpacing = h / rowNum ;  
   
-  final int left = 0 , right = 500 , top = 100 , bottom = 400 ;  
-  final int w = right - left ;
-  final int h = bottom - top ;
-  final float wSpacing = w / colNum ;
-  final float hSpacing = h / rowNum ;
-  
-
-  Garden (){
-    plants [0][0] = new Plant (Banana,100,10) ;
+  static boolean isMouseInGarden (int mouseX , int mouseY){
+    return  (mouseX > left && mouseX < right && mouseY > top && mouseY < bottom ) ;  
   }
-
-  void addPlant (int type , int mouseX , int mouseY ){
-    if (mouseX <= left || mouseX >= right || mouseY <= top || mouseY >= bottom ) return ;
-    println (mouseX,mouseY);
-    int colIndex = floor((mouseX -left )  / wSpacing ); 
-    int rowIndex = floor((mouseY - top) / hSpacing );
-    
-    int x = int(left + colIndex * wSpacing) ; 
-    int y = int(top + rowIndex * hSpacing) ; 
-    if (plants[colIndex][rowIndex] == null ) plants[colIndex][rowIndex] = new Plant (type , x , y) ;
+  static int mouseXtoColumnIndex (int mouseX){
+    return floor((mouseX -left )  / wSpacing ); 
   }
-
-  void display (){
-    for (int i = 0 ; i < colNum ; i++){
-      for (int j = 0 ; j < rowNum ; j++){
-        if (plants[i][j] != null ) plants[i][j].displayFlower() ; 
-      }
-    }
-    for (int i = 0 ; i < colNum ; i++){
-      for (int j = 0 ; j < rowNum ; j++){
-        if (plants[i][j] != null ) plants[i][j].displayBullet() ; 
-      }
-    }
+  static int getGardenXByColIndex (int colIndex){
+    return int(left + colIndex * wSpacing);
   }
-   
-  void update (){
-    for (int i = 0 ; i < colNum ; i++){
-      for (int j = 0 ; j < rowNum ; j++){
-        if (plants[i][j] != null ) plants[i][j].update();
-      }
-    }
+  static int mouseYtoRowIndex (int mouseY){
+    return  floor((mouseY - top) / hSpacing ); 
   }
-  
+  static int getGardenYbyRowIndex (int rowIndex){
+    return int(top + rowIndex * hSpacing) ;
+  }
 }

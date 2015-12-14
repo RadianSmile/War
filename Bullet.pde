@@ -3,6 +3,8 @@ class Bullet {
   float speed ; 
   float x ; 
   float y ; 
+  float w ; 
+  float h ;
   boolean broken ; 
   
   
@@ -10,7 +12,9 @@ class Bullet {
     this.x = x ; 
     this.y = y ; 
     this.speed = speed ; 
-    this.image = image ; 
+    this.image = image ;
+    this.w = image.width ;
+    this.h = image.height ;
   }
   
   void display (){
@@ -19,7 +23,8 @@ class Bullet {
   
   void fly (){
     x += speed ; 
-    if (x > 2 * width ) broken = true ; 
-    
+  }
+  boolean isBroken (){
+    return  (x > 2 * width ); 
   }
 }
