@@ -11,7 +11,7 @@ class Sun {
   int cycle ; 
   
   Sun (){
-    img = loadImage ("data/Sun.png");
+    img = loadImage ("img/money.png");
     w = img.width;
     h = img.height ; 
 

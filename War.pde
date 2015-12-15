@@ -1,5 +1,6 @@
 PImage startImg  ;
-PImage endImg ;
+PImage winImg ;
+PImage loseImg ;
 PImage bgImg ;
 
 final int START = 0 ,  PLAY = 1 , WIN = 2 , LOSE = 3 ;
@@ -23,11 +24,14 @@ Option BananaOption ;
 Option MelonOption ; 
 
 void setup (){
-  
+  startImg = loadImage("img/bg_start.jpg");
+  bgImg = loadImage("img/bg_play.jpg");
+  loseImg = loadImage("img/bg_lose.jpg") ;
+  winImg = loadImage("img/bg_win.jpg") ;
   gameState = START ;
   
-  BananaOption = new Option(Banana, BananaCost, loadImage("data/BananaOption.png") ) ;
-  MelonOption =  new Option(Melon , MelonCost , loadImage("data/BananaOption.png") ) ;  
+  BananaOption = new Option(Banana, BananaCost, loadImage("img/banana_btn.png") ) ;
+  MelonOption =  new Option(Melon , MelonCost , loadImage("img/hami_btn.png") ) ;  
   resetGame();
   size(640,480);
   //frameRate (10) ;
@@ -36,12 +40,11 @@ void setup (){
 void draw (){
   switch (gameState){
     case START:
-      background (0);
-      fill(225);text("ENTER",width/2,height/2);
+      image(startImg,0,0) ; 
       break ;
     case PLAY :
       
-      background (100);
+      image(bgImg,0,0);
       
 
       // process plants and collision test with milk 
@@ -117,13 +120,14 @@ void draw (){
       }
       
       textSize (20);
-      text("Sun : " + sunGrade , 10,20);
+      textAlign(RIGHT) ; 
+      text(sunGrade , 210 ,46); //<>//
       text("Time : " + timer.duration() , 150,20);
       
-      BananaOption.displayAt(0,50);
-      MelonOption.displayAt(0,180);
+      BananaOption.displayAt(235,10);
+      MelonOption.displayAt(300,10);
       
-      if ( timer.everyTwentySecond()){
+      if ( timer.everyTwentySecond()){ //<>//
         MilkSetting.LevelUp();
       }
       
@@ -134,13 +138,11 @@ void draw (){
 
     case WIN :
       resetGame();
-      background (0);
-      fill(225);text("ENTER",width/2,height/2);
+      image(winImg,0,0) ; 
       break ;
     case LOSE :
       resetGame();
-      background (0);
-      fill(225);text("ENTER",width/2,height/2);
+      image(loseImg,0,0) ;
       
       break ;
   }

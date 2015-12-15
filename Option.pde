@@ -24,10 +24,10 @@ class Option {
     tint (255 , alpha) ; 
     image (image, x, y);
     tint (255,255);
-    textSize(20); 
+    textSize(15); 
     fill (0);
     
-    text(cost, x + image.width/2 , y + image.height/2) ;
+    text(cost, x + image.width - 10 , y + image.height/5 * 2) ;
     
   }
   void select (){

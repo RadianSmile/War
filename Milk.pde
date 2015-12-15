@@ -6,6 +6,12 @@ static class MilkSetting {
     Speed -= .1 ; 
     ShowUpFrequency += .2 ; 
   }
+  
+  static void ResetLevel (){
+    float Speed = -.3 ;
+    float ShowUpFrequency = .5 ;
+  }
+  
 } 
 class Milk {
   float x ;
@@ -35,11 +41,11 @@ class Milk {
     cycle = 60 ;
     //speed = -.3 ;
     for (int i = 0 ; i < walkImage.length ; i++){
-      walkImage[i] = loadImage("data/Milk"+i+".png") ;
+      walkImage[i] = loadImage("img/milk_0"+(i+1)+".png") ;
     }
     this.w = walkImage[0].width ;
     this.h = walkImage[0].height ;
-    dieImage = loadImage ("data/MilkDie.png") ; 
+    dieImage = loadImage ("img/milk_05.png") ; 
   }
  
   void display (){

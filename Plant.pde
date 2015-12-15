@@ -24,18 +24,18 @@ class Plant {
       case Banana: 
         init(
           x , y , 50 ,
-          loadImage("data/Banana.png"), 
-          loadImage("data/BananaShoot.png"), 60 ,
-          loadImage("data/BananaBullet.png"),3
+          loadImage("img/banana_smile.png"), 
+          loadImage("img/banana_angry.png"), 60 ,
+          loadImage("img/banana_bullet.png"),3
         );
         break ;
         
       case Melon : 
        init(
           x , y , 100 ,
-          loadImage("data/Melon.png"), 
-          loadImage("data/MelonShoot.png"), 60 / 3  ,
-          loadImage("data/MelonBullet.png"),3
+          loadImage("img/hami_smile.png"), 
+          loadImage("img/hami_angry.png"), 60 / 3  ,
+          loadImage("img/hami_bullet.png"),3
         );
         break ;
     }
@@ -48,8 +48,8 @@ class Plant {
     PImage shootImage, float cycle,
     PImage bulletImage, float bulletSpeed
   ){
-    this.x = x ; 
-    this.y = y ; 
+    this.x = x + 5 ; 
+    this.y = y + 15 ; 
     this.w = normalImage.width;   
     this.h = normalImage.height; 
     this.normalImage = normalImage ; 

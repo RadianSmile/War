@@ -1,8 +1,8 @@
 static class Garden {
 
-  static final int colNum = 9 ;
-  static final int rowNum = 5 ;
-  static final int left = 100 , right = 600 , top = 100 , bottom = 400 ;  
+  static final int colNum = 8 ;
+  static final int rowNum = 4 ;
+  static final int left = 95 , right = 625 , top = 90 , bottom = 470 ;  
   static final int w = right - left ;
   static final int h = bottom - top ;
   static final float wSpacing = w / colNum ;

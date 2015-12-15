@@ -10,7 +10,7 @@ class Timer {
   }
   
   int duration (){
-    return floor((frameCount - startFrame) /  frameRate) ; 
+    return floor((frameCount - startFrame) /  int(frameRate)) ; 
   }
   boolean everyTwentySecond (){
     return ((frameCount - startFrame ) % ( int(frameRate) * 20 ) == 0 )   ;
