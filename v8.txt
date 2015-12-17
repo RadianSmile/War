@@ -1,0 +1,63 @@
+final int BANANA = 0;
+final int HAMI = 1;
+
+PImage bg; // declare a variable (datatype: like a parking lot)
+// like a memory that can remember every thing
+int wallet; // store integer only
+int currFruit;
+
+Button hami;
+Button banana;
+
+Money money;
+
+void setup(){
+  size(640,480);
+  
+  bg = loadImage("img/bg_play.jpg");  // initialize
+  wallet = 0; // assignment operator
+  currFruit = BANANA;
+  hami = new Button("hami_btn", 235,10);
+  banana = new Button("banana_btn",300,10);
+  money = new Money();
+
+}
+
+void draw(){
+  image(bg,0,0);  // use
+  
+  textSize(20);
+  textAlign(RIGHT);
+  fill(0);  // fill color 0-255: grey scale
+  text(wallet, 210,50);
+  
+  if (currFruit == BANANA){
+    hami.on = false;
+    banana.on = true;
+  }else{
+    hami.on = true;
+    banana.on = false;
+  }
+  hami.display();
+  banana.display();
+  money.drop();
+
+}
+
+void mousePressed(){
+  if (mouseX > hami.x && mouseY > hami.y &&
+      mouseX < hami.x+hami.w && mouseY < hami.y+hami.h){
+        // hit hami
+        currFruit = HAMI;
+  }
+  if (mouseX > banana.x && mouseY > banana.y &&
+      mouseX < banana.x+banana.w && mouseY < banana.y+banana.h){
+        // hit banana
+        currFruit = BANANA;
+  }
+  if (Util.isXYInGrid(mouseX,mouseY)){
+    int x = Util.getColbyX(mouseX);
+    int y = Util.getRowbyY(mouseY);
+    println(x,y);
+  }
+}

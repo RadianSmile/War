@@ -1,0 +1,7 @@
+PImage bg; // declare a variable (datatype: like a parking lot)
+// like a memory that can remember every thing
+
+size(640,480);
+bg = loadImage("img/bg_play.jpg");  // initialize
+
+image(bg,0,0);  // use

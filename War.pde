@@ -35,6 +35,9 @@ void setup (){
   resetGame();
   size(640,480);
   //frameRate (10) ;
+  
+  AudioController a = new AudioController () ;
+  a.banana.rewind();
 }
 
 void draw (){
@@ -127,7 +130,7 @@ void draw (){
       BananaOption.displayAt(235,10);
       MelonOption.displayAt(300,10);
       
-      if ( timer.everyTwentySecond()){ //<>//
+      if ( timer.everyNSeconds(20)){ //<>//
         MilkSetting.LevelUp();
       }
       

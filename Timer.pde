@@ -1,19 +1,27 @@
-class Timer {
-  int startFrame ; 
+class Timer{
+  int startTime;
+  int duration;
   
-  Timer (){
+  Timer(int duration){  // ms
+    this.duration = duration;
     start();
   }
   
-  void start (){
-    startFrame = frameCount ; 
+  void start(){
+    startTime = millis();
   }
   
-  int duration (){
-    return floor((frameCount - startFrame) /  int(frameRate)) ; 
+  int elapse(){
+    return (millis() - startTime);
   }
-  boolean everyTwentySecond (){
-    return ((frameCount - startFrame ) % ( int(frameRate) * 20 ) == 0 )   ;
-    
+  
+  boolean isHalf(){
+    return ((millis() - startTime) >= duration/2) ? true: false;
   }
+  
+  boolean isEnd(){
+    return ((millis() - startTime) >= duration) ? true: false;
+  }
+  
+  
 }

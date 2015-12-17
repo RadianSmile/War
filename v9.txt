@@ -1,0 +1,120 @@
+final int BANANA = 0;
+final int HAMI = 1;
+final int GAMESTART = 0;
+final int GAMERUN = 1;
+final int GAMEOVER = 2;
+
+PImage bg;
+PImage bgStart;
+PImage bgOver;
+int wallet;
+int currFruit;
+int gameState;
+
+Button hami;
+Button banana;
+
+Money money;
+
+void setup(){
+  size(640,480);
+  
+  bg = loadImage("img/bg_play.jpg");  // initialize
+  bgStart = loadImage("img/bg_start.jpg");
+  bgOver = loadImage("img/bg_lose.jpg");
+  wallet = 0; // assignment operator
+  currFruit = BANANA;
+  gameState = GAMESTART;
+  hami = new Button("hami_btn", 235,10);
+  banana = new Button("banana_btn",300,10);
+  money = new Money();
+
+}
+
+void draw(){
+  switch (gameState){
+    case GAMESTART:
+      image(bgStart,0,0);
+      
+      textSize(20);
+      textAlign(CENTER);
+      fill(255,0,0);  // fill red color
+      text("Press 's' to Start", width/2,height*4/5);
+      
+      break;
+    case GAMERUN:
+      image(bg,0,0);  // use
+      
+      textSize(20);
+      textAlign(RIGHT);
+      fill(0);  // fill color 0-255: grey scale
+      text(wallet, 210,50);
+      
+      if (currFruit == BANANA){
+        hami.on = false;
+        banana.on = true;
+      }else{
+        hami.on = true;
+        banana.on = false;
+      }
+      hami.display();
+      banana.display();
+      // hit detection
+      if (mouseX > money.x && mouseY > money.y &&
+          mouseX < money.x+money.w && mouseY < money.y+money.h){
+        wallet += 50;
+        money.restart();
+      }
+      money.drop();
+      
+      break;
+    case GAMEOVER:
+      image(bgOver,0,0);
+      
+      textSize(20);
+      textAlign(CENTER);
+      fill(255,0,0);  // fill red color
+      text("Press 's' to Restart", width/2,height*4/5);
+      break;
+  }
+
+
+}
+
+void keyPressed(){
+  // for practice 
+  switch (gameState){
+    case GAMESTART:
+    case GAMEOVER:
+      if (key == 's'){
+        gameState = GAMERUN;
+      }
+      break;
+  }
+
+  if (key == 'e'){
+    gameState = GAMEOVER;
+  }
+}
+
+
+void mousePressed(){
+  // for practice 
+  if (gameState == GAMERUN){
+    if (mouseX > hami.x && mouseY > hami.y &&
+        mouseX < hami.x+hami.w && mouseY < hami.y+hami.h){
+          // hit hami
+          currFruit = HAMI;
+    }
+    if (mouseX > banana.x && mouseY > banana.y &&
+        mouseX < banana.x+banana.w && mouseY < banana.y+banana.h){
+          // hit banana
+          currFruit = BANANA;
+    }
+    if (Util.isXYInGrid(mouseX,mouseY)){
+      int x = Util.getColbyX(mouseX);
+      int y = Util.getRowbyY(mouseY);
+      println(x,y);
+    }
+  }
+}

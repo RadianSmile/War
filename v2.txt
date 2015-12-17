@@ -1,0 +1,18 @@
+PImage bg; // declare a variable (datatype: like a parking lot)
+// like a memory that can remember every thing
+
+int wallet; // store integer only
+
+size(640,480);
+
+bg = loadImage("img/bg_play.jpg");  // initialize
+wallet = 0; // assignment operator
+
+image(bg,0,0);  // use
+wallet = wallet + 50;  // update self --> wallet += 50; compond assignement operator
+println(wallet); // use
+
+textSize(20);
+textAlign(RIGHT);
+fill(0);  // fill color 0-255: grey scale
+text(wallet, 210,50);

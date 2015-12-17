@@ -1,0 +1,43 @@
+PImage bg; // declare a variable (datatype: like a parking lot)
+// like a memory that can remember every thing
+int wallet; // store integer only
+
+Button hami;
+Button banana;
+
+Money money;
+
+void setup(){
+  size(640,480);
+  
+  bg = loadImage("img/bg_play.jpg");  // initialize
+  wallet = 0; // assignment operator
+  
+  hami = new Button("hami_btn", 235,10);
+  banana = new Button("banana_btn",300,10);
+  money = new Money();
+
+}
+
+void draw(){
+  image(bg,0,0);  // use
+  
+  textSize(20);
+  textAlign(RIGHT);
+  fill(0);  // fill color 0-255: grey scale
+  text(wallet, 210,50);
+  
+  hami.display();
+  banana.display();
+  money.drop();
+  // hit detection
+  if (mouseX > money.x && mouseY > money.y &&
+      mouseX < money.x+money.w && mouseY < money.y+money.h){
+    wallet += 50;
+    money.restart();
+  }
+}
+
+void keyPressed(){
+
+}

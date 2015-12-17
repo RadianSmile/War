@@ -1,81 +1,75 @@
-static class MilkSetting {
-  static float Speed = -.3 ;
-  static float ShowUpFrequency = .5 ;
-  static void LevelUp (){
+class Milk{
+  float x;
+  float y;
+  float w;
+  float h;
+  float speed;
+  int life;
+  int walkImageIndex;
+  int walkImageInterval;  //ms
+  Timer t;
+  boolean dead;
+  PImage[] walkImage = new PImage[4];
+  PImage imgHit;
+  PImage imgDie;
+  PImage currImage;
   
-    Speed -= .1 ; 
-    ShowUpFrequency += .2 ; 
-  }
-  
-  static void ResetLevel (){
-    float Speed = -.3 ;
-    float ShowUpFrequency = .5 ;
-  }
-  
-} 
-class Milk {
-  float x ;
-  float y ;
-  float w ;
-  float h ;
-  //float speed = -.3 ;
-  //float showupProbability = .01 ; 
-  int life ;
-  PImage[] walkImage = new PImage[4] ;
-  int walkImageIndex ;
-  float walkImageSwitchInterval ; 
-  PImage dieImage ;
-  
-  
-  int cycle ;
-  
-  PImage currentImage ; 
-  int frame ;
-  int dieFrame ; 
-  
-  
-  Milk (float x , float y ){
-    this.x = x ; 
-    this.y = y ; 
-    life = 4 ; 
-    cycle = 60 ;
-    //speed = -.3 ;
+  Milk(float x, float y){
+    this.x = x;
+    this.y = y;
+    speed = 3;
+    life = 4;
+    walkImageIndex = 0;
+    walkImageInterval = 250;
+    
     for (int i = 0 ; i < walkImage.length ; i++){
       walkImage[i] = loadImage("img/milk_0"+(i+1)+".png") ;
     }
-    this.w = walkImage[0].width ;
-    this.h = walkImage[0].height ;
-    dieImage = loadImage ("img/milk_05.png") ; 
-  }
- 
-  void display (){
-    image (currentImage , x , y ) ;  
+    imgHit = loadImage("img/milk_05.png") ;
+    imgDie = loadImage("img/milk_06.png") ;
+    currImage = walkImage[0];
+    t = new Timer(walkImageInterval);
+    w = imgDie.width;
+    h = imgDie.height;
+    dead = false;
   }
   
-  void update (){
-    frame += 1 ; 
-    frame %= cycle ;
-    
-    if (frame < .25 * cycle  )  currentImage = walkImage[0] ; 
-    else if (frame < .5  * cycle)   currentImage = walkImage[1] ; 
-    else if (frame < .75 * cycle )  currentImage = walkImage[2] ; 
-    else if (frame < cycle) currentImage = walkImage[3] ; 
-
-    if (life <= 0) {
-      currentImage =  dieImage ;
-      dieFrame++ ; 
+  void move(){
+    if (t.isEnd()){
+      if (currImage == imgDie){
+        dead = true;
+      }else{
+        x -= speed;
+        currImage = walkImage[++walkImageIndex % walkImage.length];
+        t.start();
+      }
     }
-    if (isLive())
-      x += MilkSetting.Speed; 
+    display();
   }
   
-  void hurt (){
-    life -= 1 ;
+  boolean isDead(){
+    return dead;
   }
-  boolean isLive (){
-    return life > 0 ;
+  
+  void hurt(){
+    life --;
+    if (life <= 0){
+      //println("die");
+      die();  
+    }else{
+      currImage = imgHit;
+      t.start();
+    }
   }
-  boolean isTimeForRemove (){
-    return life <= 0 && dieFrame >= cycle / 2 ; 
+  
+  void die(){
+    currImage = imgDie;
+    t.start();
+    audio.playMilkDie();
+    
+  }
+  
+  void display(){
+    image(currImage, x,y);
   }
 }

@@ -1,0 +1,33 @@
+class FruitMgr{
+  static final int EMPTY = 0;
+  static final int BANANA = 1;
+  static final int HAMI = 2;
+  ArrayList<Fruit> fruits ;
+  int [][] fMap;
+  
+  FruitMgr(){
+    fruits = new ArrayList<Fruit>();
+    fMap = new int[Util.colNum][Util.rowNum];
+    for (int i=0; i<Util.colNum ; i++){
+      for (int j=0; j<Util.rowNum; j++){
+        fMap[i][j] = EMPTY;
+      }
+    }
+  }
+  
+  boolean add(int type , int col , int row){
+    if (fMap[col][row] == EMPTY){
+      fruits.add(new Fruit(type, col, row));
+      fMap[col][row] = type;
+      return true;
+    }else{
+      return false;
+    }
+  }
+  
+  void display(){
+    for (Fruit f : fruits) {
+      f.display();
+    }
+  }
+}
